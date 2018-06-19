@@ -55,7 +55,7 @@ void splashscreem(void)
     {
         gotoxy(i,11);
         printf("\xB2");  
-        Sleep(1000); 
+        
     } 
     
     gotoxy(18,13);
@@ -72,7 +72,7 @@ void geraframeMain(void)
         system("cls");   
         printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
         printf("\xB2                                                                              \xB2");
-        printf("\xB2                                       Agenda                                 \xB2");
+        printf("\xB2                               Agenda                                         \xB2");
         printf("\xB2                                                                              \xB2");
         printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
         printf("\xB2                                                                              \xB2");
@@ -90,7 +90,7 @@ void geraframeMain(void)
         printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
-        printf("\xB2    Digite a opcao : _                                                \xB2");      
+        printf("\xB2    Digite a opcao : _                                                        \xB2");      
         printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
         printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
@@ -140,7 +140,7 @@ void framecadastrar(void)
     system("cls");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2                                                                              \xB2");
-    printf("\xB2           Super Agenda Max Ultra Turbo Power Mega 'Bicho' 1.0                \xB2");
+    printf("\xB2                               Agenda                                         \xB2");
     printf("\xB2                                                                              \xB2");
     printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\xB2                                                                              \xB2");
@@ -148,13 +148,10 @@ void framecadastrar(void)
     printf("\xB2                                                                              \xB2");
     printf("\xB2    Nome: _______________________________________________________________     \xB2");
     printf("\xB2                                                                              \xB2");
-   
     printf("\xB2                                                                              \xB2");
     printf("\xB2    Telefone:________                                                         \xB2");
     printf("\xB2                                                                              \xB2");
-   
     printf("\xB2                                                                              \xB2");
-   
     printf("\xB2                                                                              \xB2");
     printf("\xB2                                                                              \xB2");
     printf("\xB2                                                                              \xB2");
@@ -171,7 +168,7 @@ void framecadastrar(void)
 	
 	
 	
-	gotoxy(21,12);
+	gotoxy(14,11);
 	gets(x.telefone);
 	fflush(stdin);
 	
@@ -281,11 +278,13 @@ void msgbox(void)
 
 void about(void)
 {
-   
-    
+   int i;
+    for(i=0;i<100;i++){
+    	printf("\n");
+	}
     printf("Desligando...");
     Sleep(2000);
-    getch(); 
+
 }
 
 void procurarContatos(void)
