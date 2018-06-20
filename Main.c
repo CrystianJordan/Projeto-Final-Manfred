@@ -40,7 +40,7 @@ void splashscreem(void)
     int i;
     
     system("cls");     
-    system("color 0E"); 
+    system("color 0A"); 
     gotoxy(17,10);
     printf("\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB");
     gotoxy(17,11);
@@ -58,8 +58,7 @@ void splashscreem(void)
         
     } 
     
-    gotoxy(18,13);
-    printf("Aplicativo carregado com sucesso!");
+ 
     
     system("cls"); 
 }
@@ -95,7 +94,7 @@ void geraframeMain(void)
         printf("\xB2                                                                              \xB2");
         printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
         //Pega a op��o selecionada pelo usu�rio...
-        gotoxy(30,20);
+        gotoxy(22,20);
         scanf("%i",&opt);
         fflush(stdin);
     
@@ -323,7 +322,7 @@ void procurarContatos(void)
     
     system("cls");
 
-    while(fscanf(arquivo,"%s",&conteudo) != EOF){
+    while(fscanf(arquivo,"%s",&conteudo) == EOF){
         printf("%s",conteudo);                                     
     
     
