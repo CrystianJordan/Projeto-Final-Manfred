@@ -11,6 +11,8 @@ void listarContatos(void);
 void msgbox(void);
 void about(void);
 void procurarContatos(void);
+void writeFile();
+void readFile();
 
 //Vari�veis globais
 typedef struct contato{ 
@@ -22,10 +24,17 @@ typedef struct contato{
 	
 }Contato;
 
-struct contato x;
-
+ Contato agenda[100];
+int limite=100;
+int index;
 int main(void)
-{    
+{  
+    int tam=sizeof(agenda);
+    for(index=0;index<tam ;index++){
+if(agenda[index].nome==""){
+
+}
+    }  
     //Chama o splashscreem....
     splashscreem();    
   
@@ -322,7 +331,7 @@ void procurarContatos(void)
     
     system("cls");
 
-    while(fscanf(arquivo,"%s",&conteudo) == EOF){
+    while(fscanf(arquivo,"%s",&conteudo) != EOF){
         printf("%s",conteudo);                                     
     
     
@@ -335,4 +344,40 @@ void procurarContatos(void)
     fclose(arquivo);    
         
     getch();
+}
+void readFile()
+{
+	int n;
+	
+	FILE *arquivo;
+    if ((arquivo = fopen("ContatosBD.bin","rb")) == NULL)
+    {
+    	printf("Erro ao abrir arquivo");
+		exit(1);
+	}	
+	
+	for(n = 1; n < QTD; ++n) 
+	{
+		fread(ag, sizeof(Ag)*QTD, 1, arquivo);
+	}
+	
+}
+
+void writeFile()
+{
+	int n;
+	
+	FILE *arquivo;
+    if ((arquivo = fopen("ContatosBD.bin","wb")) == NULL)
+    {
+    	printf("Erro ao abrir arquivo");
+		exit(1);
+	}
+	
+	for(n = 1; n < QTD; ++n) 
+	{
+		fwrite(ag, sizeof(Ag)*QTD, 1, arquivo);
+	}
+	fclose(arquivo);
+		
 }
