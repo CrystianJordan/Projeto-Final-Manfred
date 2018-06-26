@@ -1,9 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include <windows.h>
+#include <string.h>
+#define LIMITE_AGENDA 100
 
 //Declaraï¿½ï¿½o dos protï¿½tipos das funï¿½ï¿½es
 void gotoxy(int x, int y);
-void framecadastrar(void);
+void cadastraContato(void);
 void geraframeMain(void);
 void splashscreem(void);
 void apagaBD(void);
@@ -11,30 +15,30 @@ void listarContatos(void);
 void msgbox(void);
 void about(void);
 void procurarContatos(void);
-void writeFile();
-void readFile();
-
+void leArquivo();
+void salvaArquivo();
+int veLimite();
+void setaFlag();
+void clear();
+void excluiCOntatos();
 //Variï¿½veis globais
 typedef struct contato{ 
 	char nome[20]; 
-	
-
-	char telefone[13];
-
-	
+	int flag ;
+	char telefone[13];	
 }Contato;
 
- Contato agenda[100];
-int limite=100;
-int index;
-int main(void)
-{  
-    int tam=sizeof(agenda);
-    for(index=0;index<tam ;index++){
-if(agenda[index].nome==""){
+ Contato agenda[LIMITE_AGENDA];
 
-}
-    }  
+
+int lim;
+int main(void){
+setaFlag();
+  leArquivo();
+  veLimite();
+
+
+      
     //Chama o splashscreem....
     splashscreem();    
   
@@ -75,6 +79,7 @@ void splashscreem(void)
 //Funï¿½ï¿½o pra gerar a tela principal ===============================
 void geraframeMain(void)
 { 
+leArquivo();
     int opt; 
     do{
         system("cls");   
@@ -92,9 +97,9 @@ void geraframeMain(void)
         printf("\xB2                                                                              \xB2");
         printf("\xB2    [4] Eliminar contato                                                      \xB2");
         printf("\xB2                                                                              \xB2");
-        printf("\xB2    [5] Eliminar banco de dados                                               \xB2");
+        printf("\xB2    [5] Sair do sistema                                                       \xB2");
         printf("\xB2                                                                              \xB2");
-        printf("\xB2    [6] Sair do sistema                                                       \xB2");
+        printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
         printf("\xB2                                                                              \xB2");
@@ -110,7 +115,7 @@ void geraframeMain(void)
         //Determina a aï¿½ï¿½o de acordo com a opï¿½ï¿½o selecionada no menu...    
         switch(opt){
             case 1:
-                framecadastrar();
+                cadastraContato();
                 break;
             case 2:
                 listarContatos();
@@ -119,14 +124,13 @@ void geraframeMain(void)
                 procurarContatos();
                 break;
             case 4:
-                listarContatos();
+                excluiContatos();
                 break;
             case 5:
-                apagaBD();
+               about();
                 break;
-            case 6:
-                about();
-                break;
+          
+                
             default:
                 //system("cls");
                 msgbox();
@@ -141,8 +145,10 @@ void geraframeMain(void)
 }
 
 //Funï¿½ï¿½o pra gerar a tela de cadastro ===============================
-void framecadastrar(void)
+void cadastraContato(void)
 {
+	int limite; 
+	Contato x;
 	char opt;
  	 
     system("cls");
@@ -181,70 +187,51 @@ void framecadastrar(void)
 	fflush(stdin);
 	
 	
-	
+	x.flag=1;
 	gotoxy(5,22);
-	printf("Deseja gravar os dados informados?(S/N): ");
-	scanf("%c",&opt);
-	
-	int cod=0;
-	
-	if(opt=='S' || opt=='s')
-    {
-        FILE *arquivo;
-        arquivo = fopen("ContatosBD.txt","a");
-        fprintf(arquivo,"Nome:%s  Telefone:%s \n",x.nome,x.telefone);
-        fclose(arquivo);
+limite=veLimite();
+int i;
+int verif=0;
+for(i=0;i<LIMITE_AGENDA;i++){
+if(strcmp(agenda[i].telefone,x.telefone)==0){
+verif=1;
+break;	
+}	
+}
+if(verif==0){
+	agenda[limite]=x;
+printf("%i",limite);
+      
+       salvaArquivo();
+printf("Contato salvo com sucesso, pressione qualquer tecla para continuar");
+}else{
+	printf("Esse telefone ja existe, pressione qualquer tecla para continuar");
+}
 
+getch();
         
-    }
+    
 }
 
-void apagaBD(void)
-{
-    char opt;
-    
-    //Desenha o frame do messagebox...
-    msgbox();  
-    
-    gotoxy(19,9);
-    printf("Deseja apagar a base de dados do sistema?");
-    gotoxy(20,10);
-    printf("Esta operacao nao podera ser desfeita!");
-    gotoxy(17,11);
-    printf("Aperte 'S' para SIM ou qualquer tecla para NAO");
-    gotoxy(40,12);
-    scanf("%c",&opt);
-    fflush(stdin);
-    
-    if (opt=='S' || opt=='s')
-    {
-        FILE *arquivo;
-        arquivo = fopen("ContatosBD.txt","w");
-        gotoxy(23,13);
-        printf("Base de dados apagada com sucesso!");
-        Sleep(1000);
-        fclose(arquivo);           
-    }
-}
+
 
 void listarContatos(void)
 {
-    FILE *arquivo; //Ponteiro do arquivo
-    char texto[200];
-    int cont=1;
-    
-    arquivo = fopen("ContatosBD.txt","r"); //Abre o arquivo para leitura...
-    system("cls");
-    
+  splashscreem(); 
+  gotoxy(0,0);
+  leArquivo();
+    int i;
     printf("Lista de contatos\n");
     printf("\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\n\n");
     
-    while(fgets(texto,126,arquivo)){
-        printf("%s\n",texto);
-        cont++;
-    }
-    fclose(arquivo); //Fecha o arquivo...
-    gotoxy(0,0);
+  for(i=0;i<=LIMITE_AGENDA;i++){
+  if(agenda[i].flag!=0){
+  		printf("Nome:%s    Telefone:%s\n",agenda[i].nome,agenda[i].telefone);
+  }
+  	
+
+  }
+    printf("Pressione qualquer tecla para continuar");
     getch();
 }
 
@@ -290,13 +277,15 @@ void about(void)
     for(i=0;i<100;i++){
     	printf("\n");
 	}
+	salvaArquivo();
     printf("Desligando...");
     Sleep(2000);
-
+exit(0);
 }
 
 void procurarContatos(void)
 {
+	Contato x;
     int cont;
     char conteudo[126];
     
@@ -326,28 +315,24 @@ void procurarContatos(void)
 	gotoxy(11,8);
 	scanf("%s",x.nome);  
     
-    FILE *arquivo;
-    arquivo = fopen("ContatosBD.txt","r");
-    
-    system("cls");
-
-    while(fscanf(arquivo,"%s",&conteudo) != EOF){
-        printf("%s",conteudo);                                     
-    
-    
-    fclose(arquivo); //Fecha o arquivo...
-
-        
-        cont++;
-    }
-  
-    fclose(arquivo);    
-        
+   splashscreem();
+   gotoxy(0,0);
+   printf("Aqui estão todos os resultados do nome procurado\n");
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2B2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2B2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n\n");
+	for(cont=0;cont<=LIMITE_AGENDA;cont++){
+		
+		if(strcmp (agenda[cont].nome,x.nome) == 0){
+			if(agenda[cont].flag!=0){
+					printf("Nome:%s       Telefone:%s\n",agenda[cont].nome,agenda[cont].telefone);
+			}
+		
+		}
+	}
     getch();
 }
-void readFile()
+void leArquivo()
 {
-	int n;
+int n;
 	
 	FILE *arquivo;
     if ((arquivo = fopen("ContatosBD.bin","rb")) == NULL)
@@ -356,14 +341,15 @@ void readFile()
 		exit(1);
 	}	
 	
-	for(n = 1; n < QTD; ++n) 
+	for(n = 1; n <LIMITE_AGENDA; ++n) 
 	{
-		fread(ag, sizeof(Ag)*QTD, 1, arquivo);
-	}
-	
+		fread(agenda, sizeof(Contato)*LIMITE_AGENDA, 1, arquivo);
+	}	
+		
+
 }
 
-void writeFile()
+void salvaArquivo()
 {
 	int n;
 	
@@ -374,10 +360,87 @@ void writeFile()
 		exit(1);
 	}
 	
-	for(n = 1; n < QTD; ++n) 
+	for(n = 1; n < LIMITE_AGENDA; ++n) 
 	{
-		fwrite(ag, sizeof(Ag)*QTD, 1, arquivo);
+		fwrite(agenda, sizeof(Contato)*LIMITE_AGENDA, 1, arquivo);
 	}
 	fclose(arquivo);
-		
 }
+	
+
+		
+	
+		
+
+
+int veLimite(){
+	int lim=0;
+	int index;
+      
+    for(index=0;index<LIMITE_AGENDA ;index++){
+if(agenda[index].flag!=0){
+lim=index+1;
+}else{
+	
+    break;
+}
+}
+return lim;
+}
+
+void setaFlag(){
+	
+	int i;
+	for(i=0;i<LIMITE_AGENDA;i++){
+		if(agenda[i].flag==1){
+			
+		}else{
+			agenda[i].flag=0;
+		}
+		
+	}
+	
+}
+void clear(){
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
+void excluiContatos(){
+ splashscreem(); 
+  gotoxy(0,0);
+  leArquivo();
+    int i;
+    printf("Lista de contatos\n");
+    printf("\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\n\n");
+    
+  for(i=0;i<=LIMITE_AGENDA;i++){
+  if(agenda[i].flag!=0){
+  		printf("Nome:%s    Telefone:%s\n",agenda[i].nome,agenda[i].telefone);
+  }
+  	
+
+  }
+	Contato x;
+	printf("\nDigite o telefone de quem voce quer excluir: ");
+	gets(x.telefone);
+	fflush(stdin);
+	
+	int j;
+	for(i=0;i<=LIMITE_AGENDA;i++){
+		
+	
+			if(strcmp(x.telefone,agenda[i].telefone)==0){
+			for(j=i;j<LIMITE_AGENDA;j++){
+				if(j==100){
+					break;
+				}else{
+					agenda[j]=agenda[j+1];
+				}
+			}
+		}	
+		}
+	salvaArquivo();
+	}
+		
+	
+
